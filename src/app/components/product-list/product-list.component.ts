@@ -8,10 +8,10 @@ import {CurrencyPipe} from '@angular/common';
   imports: [
     CurrencyPipe
   ],
-  templateUrl: './product-list.html',
-  styleUrl: './product-list.css',
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.css',
 })
-export class ProductList implements OnInit {
+export class ProductListComponent implements OnInit {
 
   private readonly productService = inject(ProductService);
 
