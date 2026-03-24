@@ -32,16 +32,16 @@
       <div class="card border-0 shadow-sm p-3 rounded-4">
         <h6 class="fw-bold mb-3 px-3 text-uppercase small tracking-wider">Categories</h6>
         <nav aria-label="Categories navigation">
-          <a href="#" class="category-link active">Books</a>
-          <a href="#" class="category-link">Coffee Mugs</a>
-          <a href="#" class="category-link">Mouse Pads</a>
-          <a href="#" class="category-link">Luggage Tags</a>
+          <a routerLink="/category/1" routerLinkActive="active" class="category-link">Books</a>
+          <a routerLink="/category/2" routerLinkActive="active" class="category-link">Coffee Mugs</a>
+          <a routerLink="/category/3" routerLinkActive="active" class="category-link">Mouse Pads</a>
+          <a routerLink="/category/4" routerLinkActive="active" class="category-link">Luggage Tags</a>
         </nav>
       </div>
     </aside>
 
     <section class="col-lg-9">
-      <app-product-list></app-product-list>
+      <router-outlet></router-outlet>
     </section>
   </div>
 </main>
