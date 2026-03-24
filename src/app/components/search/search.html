@@ -1,0 +1,11 @@
+<form class="d-flex w-100" (submit)="doSearch(searchInput.value)">
+  <div class="input-group">
+    <input #searchInput
+           type="text"
+           class="search-input border-0 flex-grow-1 rounded-start-pill ps-4"
+           placeholder="Search for products..."
+           aria-label="Search">
+
+    <button class="btn btn-primary rounded-end-pill px-4" type="submit">Search</button>
+  </div>
+</form>

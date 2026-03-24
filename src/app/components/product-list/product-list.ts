@@ -15,6 +15,7 @@ export class ProductList implements OnInit {
   products =  signal<Product[]>([]);
   currentCategoryId: number = 1;
   currentCategoryName: string = "";
+  searchMode: boolean = false;
 
   private readonly productService = inject(ProductService);
   private readonly route = inject(ActivatedRoute);
@@ -26,6 +27,28 @@ export class ProductList implements OnInit {
   }
 
   listProducts() {
+
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+
+    if (this.searchMode) {
+      this.handleSearchProducts();
+    } else {
+      this.handleListProducts();
+    }
+  }
+
+  handleSearchProducts() {
+
+    const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
+
+    this.productService.searchProducts(theKeyword).subscribe(
+      data => {
+        this.products.set(data);
+      }
+    )
+  }
+
+  handleListProducts() {
 
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id')
 
@@ -39,7 +62,7 @@ export class ProductList implements OnInit {
 
     this.productService.getProductList(this.currentCategoryId).subscribe(
       data => {
-        this.products.set(data.content)
+        this.products.set(data)
       });
   }
 }
