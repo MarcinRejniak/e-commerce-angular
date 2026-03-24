@@ -14,6 +14,7 @@ export class ProductList implements OnInit {
 
   products =  signal<Product[]>([]);
   currentCategoryId: number = 1;
+  currentCategoryName: string = "";
 
   private readonly productService = inject(ProductService);
   private readonly route = inject(ActivatedRoute);
@@ -30,8 +31,10 @@ export class ProductList implements OnInit {
 
     if (hasCategoryId) {
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
+      this.currentCategoryName = this.route.snapshot.paramMap.get('name')!;
     } else {
       this.currentCategoryId = 1;
+      this.currentCategoryName = 'Books';
     }
 
     this.productService.getProductList(this.currentCategoryId).subscribe(
