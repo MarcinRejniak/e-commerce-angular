@@ -7,10 +7,10 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-product-list',
   imports: [CurrencyPipe],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css',
+  templateUrl: './product-list.html',
+  styleUrl: './product-list.css',
 })
-export class ProductListComponent implements OnInit {
+export class ProductList implements OnInit {
 
   products =  signal<Product[]>([]);
   currentCategoryId: number = 1;
