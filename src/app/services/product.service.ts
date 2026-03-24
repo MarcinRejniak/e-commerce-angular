@@ -11,7 +11,20 @@ export class ProductService {
   private readonly baseUrl = "http://localhost:8081/api/products";
   private readonly httpClient = inject(HttpClient);
 
-  getProductList(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.baseUrl);
+  getProductList(theCategoryId: number): Observable<GetResponse> {
+
+    const searchUrl = `${this.baseUrl}/search?categoryId=${theCategoryId}`;
+
+    return this.httpClient.get<GetResponse>(searchUrl);
   }
+}
+
+  interface GetResponse {
+    content: Product[];
+    page: {
+      size: number;
+      totalElements: number;
+      totalPages: number;
+      number: number;
+    }
 }
