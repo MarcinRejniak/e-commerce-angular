@@ -20,7 +20,7 @@ export class ProductList implements OnInit {
   searchMode = signal<boolean>(false);
 
   pageNumber = signal<number>(1);
-  pageSize = signal<number>(10);
+  pageSize = signal<number>(5);
   totalElements = signal<number>(0);
 
   private readonly productService = inject(ProductService);
@@ -96,5 +96,11 @@ export class ProductList implements OnInit {
           }
         )
     }
+  }
+
+  updatePageSize(pageSize: string) {
+    this.pageSize.set(+pageSize);
+    this.pageNumber.set(1);
+    this.listProducts();
   }
 }

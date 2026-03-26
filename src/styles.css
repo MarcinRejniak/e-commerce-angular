@@ -91,16 +91,23 @@ footer {
   outline: none;
 }
 
-.custom-pagination .page-link:hover{
+.custom-pagination .page-item:not(.active) .page-link:hover{
   background: #eff6ff;
 }
 
 .custom-pagination .page-item.disabled .page-link{
   background-color: white !important;
-  color: var(--text-dark);
+  color: var(--primary-color);
   border-color: #e2e8f0;
 }
 
-.custom-pagination .page-item:not(.active) .page-link {
-  background-color: white !important;
+.custom-pagination ul.pagination {
+  margin-bottom: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+.custom-select:focus {
+  box-shadow: none !important;
+  outline: 0;
 }

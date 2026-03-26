@@ -50,13 +50,26 @@
     <div class="footer-pagination p-3 bg-white shadow-sm rounded-3">
       <div class="row align-items-center">
 
-        <div class="col-md-6 text-muted small text-center text-md-start mb-3 mb-md-0">
-          Showing <span class="fw-bold" style="color: var(--text-dark)">{{ products().length }}</span>
-          of {{ totalElements() }} products
+        <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
+          <div class="text-muted small me-3">
+            Showing <span class="fw-bold" style="color: var(--text-dark)">{{ products().length }}</span>
+            of {{ totalElements() }} products
+          </div>
+
+          <div class="d-flex align-items-center">
+            <span class="small text-muted me-3 mb-0 text-nowrap">Page size:</span>
+            <select #pageSelect class="form-select form-select-sm custom-select"
+                    (change)="updatePageSize(pageSelect.value)">
+              <option [selected]="pageSize() === 5">5</option>
+              <option [selected]="pageSize() === 10">10</option>
+              <option [selected]="pageSize() === 20">20</option>
+              <option [selected]="pageSize() === 50">50</option>
+            </select>
+          </div>
         </div>
 
         <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
-          <ngb-pagination class="custom-pagination"
+          <ngb-pagination class="custom-pagination m-0"
             [(page)]="pageNumber"
             [pageSize]="pageSize()"
             [collectionSize]="totalElements()"
