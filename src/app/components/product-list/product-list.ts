@@ -23,6 +23,8 @@ export class ProductList implements OnInit {
   pageSize = signal<number>(5);
   totalElements = signal<number>(0);
 
+  previousKeyword = signal<string>("");
+
   private readonly productService = inject(ProductService);
   private readonly route = inject(ActivatedRoute);
 
@@ -47,11 +49,15 @@ export class ProductList implements OnInit {
 
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
 
-    this.productService.searchProducts(theKeyword).subscribe(
-      data => {
-        this.products.set(data);
-      }
-    )
+    if (this.previousKeyword() !== theKeyword) {
+      this.pageNumber.set(1);
+    }
+
+    this.previousKeyword.set(theKeyword);
+
+    this.productService.searchProductsPaginate(this.pageNumber() - 1,
+                                                this.pageSize(),
+                                                theKeyword).subscribe(this.processResult());
   }
 
   handleListProducts() {
@@ -76,24 +82,11 @@ export class ProductList implements OnInit {
       this.productService.getProductListPaginate(this.pageNumber() - 1,
         this.pageSize(),
         this.currentCategoryId())
-        .subscribe(
-          data => {
-            this.products.set(data.content);
-            this.pageNumber.set(data.number + 1);
-            this.pageSize.set(data.size);
-            this.totalElements.set(data.totalElements);
-          }
-        )
+        .subscribe(this.processResult())
     } else {
       this.productService.getAllProductsPaginate(this.pageNumber() - 1,
         this.pageSize())
-        .subscribe(
-          data => {
-            this.products.set(data.content);
-            this.pageNumber.set(data.number + 1);
-            this.pageSize.set(data.size);
-            this.totalElements.set(data.totalElements);
-          }
+        .subscribe(this.processResult()
         )
     }
   }
@@ -102,5 +95,14 @@ export class ProductList implements OnInit {
     this.pageSize.set(+pageSize);
     this.pageNumber.set(1);
     this.listProducts();
+  }
+
+  processResult() {
+    return (data: any) => {
+      this.products.set(data.content);
+      this.pageNumber.set(data.number + 1);
+      this.pageSize.set(data.size);
+      this.totalElements.set(data.totalElements);
+    };
   }
 }
