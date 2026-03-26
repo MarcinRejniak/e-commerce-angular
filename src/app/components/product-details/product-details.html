@@ -3,7 +3,9 @@
     <div class="row align-items-center">
 
       <div class="col-md-5 product-img-wrapper rounded-3 text-center">
-        <img [src]="product()?.imageUrl"
+        <img [ngSrc]="product()?.imageUrl!"
+             width="200"
+             height="180"
              (error)="$any($event.target).src = 'images/products/placeholder.png'"
              class="img-fluid"
              style="max-height: 400px; object-fit: contain;"
@@ -12,7 +14,7 @@
 
       <div class="col-md-7 ps-md-5">
         <div class="text-muted small mb-2">
-          Category: {{ product()?.category.categoryName }}
+          Category: {{ product()?.category?.categoryName }}
         </div>
 
         <h1 class="text-dark fw-bold mb-3">{{ product()?.name }}</h1>

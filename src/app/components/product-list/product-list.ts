@@ -1,12 +1,12 @@
 import {Component, inject, signal, OnInit} from '@angular/core';
 import {Product} from '../../common/product';
 import {ProductService} from '../../services/product.service';
-import {CurrencyPipe} from '@angular/common';
+import {CurrencyPipe, NgOptimizedImage} from '@angular/common';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
-  imports: [CurrencyPipe, RouterLink],
+  imports: [CurrencyPipe, RouterLink, NgOptimizedImage],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })

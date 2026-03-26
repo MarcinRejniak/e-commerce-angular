@@ -6,11 +6,13 @@
         <div class="product-img-wrapper">
 
           <a routerLink="/products/{{ product.id }}" class="text-decoration-none">
-            <img [src]="product.imageUrl"
+            <img [ngSrc]="product.imageUrl"
+                 width="300"
+                 height="270"
                  (error)="$any($event.target).src = 'images/products/placeholder.png'"
                  class="img-fluid rounded-3"
                  style="max-height: 180px; object-fit: contain;"
-                 alt="Product">
+                 alt="{{ product.name }}">
           </a>
 
         </div>
