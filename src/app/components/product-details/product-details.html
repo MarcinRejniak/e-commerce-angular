@@ -1,7 +1,41 @@
-<div class="detail-section">
-  <div class="container-fluid">
+<div class="container">
+  <div class="card product-card shadow-sm p-3 border-0">
+    <div class="row align-items-center">
 
-    <p style="margin-top: 100px">product-details works!</p>
+      <div class="col-md-5 product-img-wrapper rounded-3 text-center">
+        <img [src]="product()?.imageUrl"
+             (error)="$any($event.target).src = 'images/products/placeholder.png'"
+             class="img-fluid"
+             style="max-height: 400px; object-fit: contain;"
+             alt="{{ product()?.name }}">
+      </div>
 
+      <div class="col-md-7 ps-md-5">
+        <div class="text-muted small mb-2">
+          Category: {{ product()?.category.categoryName }}
+        </div>
+
+        <h1 class="text-dark fw-bold mb-3">{{ product()?.name }}</h1>
+
+        <p class="text-secondary mb-4" style="line-height: 1.6;">
+          {{ product()?.description }}
+        </p>
+
+        <div class="price-tag mb-4" style="font-size: 2.5rem;">
+          {{ product()?.unitPrice | currency: 'USD' }}
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex">
+          <button class="btn btn-primary btn-cart px-5 py-3 shadow-sm">
+            <i class="bi bi-cart-plus me-2"></i>Add to Cart
+          </button>
+
+          <a routerLink="/products" class="btn btn-outline-secondary px-4 py-3 border-0">
+            Back to Shop
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
