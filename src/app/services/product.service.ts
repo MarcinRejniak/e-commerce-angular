@@ -13,6 +13,16 @@ export class ProductService {
   private readonly categoryUrl = "http://localhost:8081/api/product-categories"
   private readonly httpClient = inject(HttpClient);
 
+  getProductListPaginate(page: number,
+                         pageSize:number,
+                         theCategoryId: number): Observable<GetResponseProduct> {
+
+    const searchUrl = `${this.baseUrl}/search/getByCategory?categoryId=${theCategoryId}`
+                            + `&page=${page}&size=${pageSize}`;
+
+    return this.httpClient.get<GetResponseProduct>(searchUrl);
+  }
+
   getProductList(theCategoryId: number): Observable<Product[]> {
 
     const searchUrl = `${this.baseUrl}/search/getByCategory?categoryId=${theCategoryId}`;
@@ -44,14 +54,19 @@ export class ProductService {
 
     return this.httpClient.get<Product>(productUrl);
   }
+
+  getAllProductsPaginate(page: number, pageSize: number): Observable<GetResponseProduct> {
+
+    const searchUrl = `${this.baseUrl}?page=${page}&size=${pageSize}`;
+
+    return this.httpClient.get<GetResponseProduct>(searchUrl);
+  }
 }
 
   interface GetResponseProduct {
     content: Product[];
-    page: {
-      size: number;
-      totalElements: number;
-      totalPages: number;
-      number: number;
-    }
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number: number;
 }

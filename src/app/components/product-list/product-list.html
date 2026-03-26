@@ -1,5 +1,5 @@
 <div class="row g-4">
-  @for (product of products(); track product.sku) {
+  @for (product of products(); track product.id) {
     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
 
       <div class="card product-card shadow-sm h-100">
@@ -36,15 +36,38 @@
       </div>
     </div>
   }
-</div>
 
-@if (products().length == 0) {
-  <div class="row">
+  @if (products().length == 0) {
     <div class="col-12 mt-4 mb-4">
       <div class="alert alert-warning text-center shadow-sm border-0 py-4" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2"></i>
         No products found. Try searching for something else!
       </div>
     </div>
+  }
+
+  <div class="col-12 mt-5 mb-5">
+    <div class="footer-pagination p-3 bg-white shadow-sm rounded-3">
+      <div class="row align-items-center">
+
+        <div class="col-md-6 text-muted small text-center text-md-start mb-3 mb-md-0">
+          Showing <span class="fw-bold" style="color: var(--text-dark)">{{ products().length }}</span>
+          of {{ totalElements() }} products
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
+          <ngb-pagination class="custom-pagination"
+            [(page)]="pageNumber"
+            [pageSize]="pageSize()"
+            [collectionSize]="totalElements()"
+            [maxSize]="5"
+            [boundaryLinks]="true"
+            [ellipses]="true"
+            (pageChange)="listProducts()">
+
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
   </div>
-}
+</div>
