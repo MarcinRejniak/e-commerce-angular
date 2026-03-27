@@ -3,6 +3,8 @@ import {Product} from '../../common/product';
 import {ProductService} from '../../services/product.service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {CurrencyPipe, NgOptimizedImage} from '@angular/common';
+import {CartItem} from '../../common/cart-item';
+import {CartService} from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -19,6 +21,7 @@ export class ProductDetails implements OnInit {
   product = signal<Product | undefined>(undefined);
 
   private readonly productService = inject(ProductService);
+  private readonly cartService = inject(CartService);
   private readonly route = inject(ActivatedRoute);
 
   ngOnInit(): void {
@@ -36,5 +39,12 @@ export class ProductDetails implements OnInit {
       data => {
         this.product.set(data);
       })
+  }
+
+  addToCart() {
+
+    const cartItem = new CartItem(this.product()!);
+
+    this.cartService.addToCart(cartItem);
   }
 }
