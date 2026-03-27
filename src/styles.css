@@ -5,6 +5,8 @@
   --text-muted: #64748b;
   --white: #ffffff;
   --transition: all 0.2s ease;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+  --border-color: #e2e8f0;
 }
 
 body {
@@ -160,4 +162,132 @@ footer {
   color: var(--text-dark);
   font-size: 0.95rem;
   min-width: 100px;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.cart-items-section {
+  background: white;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.section-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  padding: 1rem 1.5rem;
+  background: var(--bg-light);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.cart-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s;
+}
+
+.cart-row:hover {
+  background-color: #fafafa;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.product-info img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.product-details h3 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.unit-price {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.quantity-badge {
+  background: var(--bg-light);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  font-weight: 600;
+}
+
+.subtotal {
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: right;
+}
+
+.summary-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 100px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.total {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-top: 1rem;
+}
+
+.btn-checkout {
+  width: 100%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 1.2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-checkout:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
 }

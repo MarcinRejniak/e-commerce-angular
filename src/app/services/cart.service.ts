@@ -29,4 +29,27 @@ export class CartService {
       this.cartItems.set([...currentItems, cartItem])
     }
   }
+
+  decrementQuantity(item: CartItem) {
+
+    item.quantity--;
+    if (item.quantity === 0) {
+      this.remove(item);
+    } else {
+      this.cartItems.set([...this.cartItems()]);
+    }
+  }
+
+  incrementQuantity(item: CartItem) {
+
+    item.quantity++;
+    this.cartItems.set([...this.cartItems()]);
+  }
+
+  public remove(cartItem: CartItem) {
+
+    const updatedCartItems = this.cartItems().filter(item => item.id !== cartItem.id);
+
+    this.cartItems.set(updatedCartItems);
+  }
 }
