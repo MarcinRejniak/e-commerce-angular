@@ -4,6 +4,8 @@ import {ProductService} from '../../services/product.service';
 import {CurrencyPipe, NgOptimizedImage} from '@angular/common';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
+import {CartService} from '../../services/cart.service';
+import {CartItem} from '../../common/cart-item';
 
 @Component({
   selector: 'app-product-list',
@@ -26,6 +28,7 @@ export class ProductList implements OnInit {
   previousKeyword = signal<string>("");
 
   private readonly productService = inject(ProductService);
+  private readonly cartService = inject(CartService);
   private readonly route = inject(ActivatedRoute);
 
   ngOnInit(): void {
@@ -108,6 +111,8 @@ export class ProductList implements OnInit {
 
   addToCart(product: Product) {
 
-    console.log(`Adding to cart: ${product?.name}`);
+    const cartItem = new CartItem(product)
+
+    this.cartService.addToCart(cartItem);
   }
 }
