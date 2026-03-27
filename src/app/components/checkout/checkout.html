@@ -28,6 +28,147 @@
         </div>
       </section>
 
+      <section formGroupName="shippingAddress" class="form-section">
+        <h2 class="section-title"><i class="fa fa-truck"></i> Shipping Address</h2>
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <label for="shipping-country">Country</label>
+            <select id="shipping-country" formControlName="country" class="form-select">
+              <option>
+                poland
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field full-width">
+            <label for="shipping-street">Street</label>
+            <input id="shipping-street" formControlName="street" type="text">
+          </div>
+
+          <div class="form-field">
+            <label for="shipping-city">City</label>
+            <input id="shipping-city" formControlName="city" type="text">
+          </div>
+
+          <div class="form-field">
+            <label for="shipping-state">State</label>
+            <select id="shipping-state" formControlName="state" class="form-select">
+              <option>
+                state
+              </option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="shipping-zipCode">Zip Code</label>
+            <input id="shipping-zipCode" formControlName="zipcode" type="text">
+          </div>
+        </div>
+      </section>
+
+      <div class="checkbox-group">
+        <label class="checkbox-container">
+          <input type="checkbox" (change)="copyShippingAddressToBillingAddress($event)">
+          <span class="checkbox-text">Billing address same as shipping</span>
+        </label>
+      </div>
+
+      <section formGroupName="billingAddress" class="form-section">
+        <h2 class="section-title"><i class="fa fa-home"></i> Billing Address</h2>
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <label for="billing-country">Country</label>
+            <input id="billing-country" formControlName="country" type="text">
+          </div>
+
+          <div class="form-field full-width">
+            <label for="billing-street">Street</label>
+            <input id="billing-street" formControlName="street" type="text">
+          </div>
+
+          <div class="form-field">
+            <label for="billing-city">City</label>
+            <input id="billing-city" formControlName="city" type="text">
+          </div>
+
+          <div class="form-field">
+            <label for="billing-state">State</label>
+            <input id="billing-state" formControlName="state" type="text">
+          </div>
+
+          <div class="form-field">
+            <label for="billing-zipCode">Zip Code</label>
+            <input id="billing-zipCode" formControlName="zipcode" type="text">
+          </div>
+        </div>
+      </section>
+
+      <section formGroupName="creditCard" class="form-section">
+        <h2 class="section-title"><i class="fa fa-credit-card"></i> Payment Information</h2>
+
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <label for="cardType">Card Type</label>
+            <select id="cardType" formControlName="cardType" class="form-select">
+              <option value="">Select Card Type...</option>
+              <option value="Visa">Visa</option>
+              <option value="Mastercard">Mastercard</option>
+              <option value="American Express">American Express</option>
+            </select>
+          </div>
+
+          <div class="form-field full-width">
+            <label for="nameOnCard">Name on Card</label>
+            <input id="nameOnCard" formControlName="nameOnCard" type="text" placeholder="Full name as displayed on card">
+          </div>
+
+          <div class="form-field full-width">
+            <label for="cardNumber">Card Number</label>
+            <input id="cardNumber" formControlName="cardNumber" type="text" placeholder="1234 5678 9101 1121">
+          </div>
+
+          <div class="form-field">
+            <label for="expirationMonth">Expiration Month</label>
+            <select id="expirationMonth" formControlName="expirationMonth" class="form-select">
+              <option value="">Month</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="expirationYear">Expiration Year</label>
+            <select id="expirationYear" formControlName="expirationYear" class="form-select">
+              <option value="">Year</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="securityCode">Security Code (CVV)</label>
+            <input id="securityCode" formControlName="securityCode" type="password" placeholder="123" maxlength="3">
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section order-review">
+        <h2 class="section-title"><i class="fa fa-shopping-cart"></i> Review Your Order</h2>
+
+        <div class="review-box">
+          <div class="review-row">
+            <span class="label">Total Quantity:</span>
+            <span class="value">{{ cartService.totalQuantity() }}</span>
+          </div>
+
+          <div class="review-row">
+            <span class="label">Shipping:</span>
+            <span class="value free">FREE</span>
+          </div>
+
+          <div class="review-row total">
+            <span class="label">Total Price:</span>
+            <span class="value">{{ cartService.totalPrice() | currency: 'USD' }}</span>
+          </div>
+        </div>
+      </section>
+
       <div class="form-actions">
         <button type="submit" class="btn-purchase" [disabled]="!checkoutFormGroup.valid">
           Complete Purchase

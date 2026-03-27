@@ -91,6 +91,41 @@
   border-top: 1px solid var(--border-color);
 }
 
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.form-select option {
+  color: var(--text-dark);
+  background-color: white;
+}
+
+.expiration-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 .btn-purchase {
   width: 100%;
   background-color: var(--primary-color);
@@ -114,4 +149,91 @@
   opacity: 0.5;
   cursor: not-allowed;
   filter: grayscale(1);
+}
+
+.checkbox-group {
+  margin: 2.5rem 0;
+  padding: 1.25rem;
+  background-color: #f8fafc;
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.checkbox-group:hover {
+  border-color: var(--primary-color);
+  background-color: #f1f5f9;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 12px;
+  user-select: none;
+}
+
+.checkbox-container input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.checkbox-text {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.order-review {
+  margin-top: 3rem;
+}
+
+.review-box {
+  background: var(--bg-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.review-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed #cbd5e1;
+}
+
+.review-row:last-child {
+  border-bottom: none;
+}
+
+.review-row .label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.review-row .value {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.review-row .value.free {
+  color: #10b981;
+}
+
+.review-row.total {
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.review-row.total .label {
+  color: var(--text-dark);
+  font-size: 1.1rem;
+}
+
+.review-row.total .value {
+  color: var(--primary-color);
+  font-size: 1.25rem;
 }
