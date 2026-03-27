@@ -69,7 +69,7 @@
             <span>Total</span>
             <span class="total-amount">{{ cartService.totalPrice() | currency: 'USD' }}</span>
           </div>
-          <button class="btn-checkout">Checkout</button>
+          <button routerLink="/checkout" class="btn-checkout">Checkout</button>
           <a routerLink="/products" class="back-link">← Back to products</a>
         </div>
       </aside>

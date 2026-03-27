@@ -1,1 +1,39 @@
-<p>checkout works!</p>
+<div class="checkout-container">
+  <div class="checkout-card">
+    <header class="checkout-header">
+      <h1>Checkout</h1>
+      <p>Please fill in the details below to complete your order.</p>
+    </header>
+
+    <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+
+      <section formGroupName="customer" class="form-section">
+        <h2 class="section-title"><i class="fa fa-user"></i> Customer Information</h2>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="firstName">First Name</label>
+            <input id="firstName" formControlName="firstName" type="text" placeholder="e.g. John">
+          </div>
+
+          <div class="form-field">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" formControlName="lastName" type="text" placeholder="e.g. Doe">
+          </div>
+
+          <div class="form-field full-width">
+            <label for="email">Email Address</label>
+            <input id="email" formControlName="email" type="email" placeholder="john.doe@example.com">
+          </div>
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-purchase" [disabled]="!checkoutFormGroup.valid">
+          Complete Purchase
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
