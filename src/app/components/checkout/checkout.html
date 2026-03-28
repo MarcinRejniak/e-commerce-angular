@@ -130,14 +130,18 @@
           <div class="form-field">
             <label for="expirationMonth">Expiration Month</label>
             <select id="expirationMonth" formControlName="expirationMonth" class="form-select">
-              <option value="">Month</option>
+              @for (month of creditCardMonths(); track month) {
+                <option>{{ month }}</option>
+              }
             </select>
           </div>
 
           <div class="form-field">
             <label for="expirationYear">Expiration Year</label>
-            <select id="expirationYear" formControlName="expirationYear" class="form-select">
-              <option value="">Year</option>
+            <select id="expirationYear" formControlName="expirationYear" (change)="handleMonthsAndYears()" class="form-select">
+              @for (year of creditCardYears(); track year) {
+                <option>{{  year }}</option>
+              }
             </select>
           </div>
 

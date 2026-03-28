@@ -1,7 +1,8 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {CartService} from '../../services/cart.service';
 import {CurrencyPipe} from '@angular/common';
+import {DevStackShopFormService} from '../../services/dev-stack-shop-form-service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,8 +14,12 @@ export class Checkout implements OnInit{
 
   checkoutFormGroup!: FormGroup;
 
+  creditCardYears = signal<number[]>([]);
+  creditCardMonths = signal<number[]>([]);
+
   private readonly formBuilder = inject(FormBuilder);
   public readonly cartService = inject(CartService);
+  public readonly devStackShopFormService = inject(DevStackShopFormService);
 
   ngOnInit(): void {
 
@@ -47,6 +52,20 @@ export class Checkout implements OnInit{
         expirationYear: [''],
       })
     })
+
+    const startMonth = new Date().getMonth() + 1;
+
+    this.devStackShopFormService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        this.creditCardMonths.set(data);
+      }
+    )
+
+    this.devStackShopFormService.getCreditCardYears().subscribe(
+      data => {
+        this.creditCardYears.set(data);
+      }
+    )
   }
 
   onSubmit() {
@@ -65,5 +84,27 @@ export class Checkout implements OnInit{
     } else {
       this.checkoutFormGroup.get('billingAddress')?.reset();
     }
+  }
+
+  handleMonthsAndYears() {
+
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear = new Date().getFullYear();
+    const selectedYear = creditCardFormGroup?.value.expirationYear;
+
+    let startMonth;
+
+    if (currentYear == selectedYear) {
+      startMonth = new Date().getMonth() + 1;
+    } else {
+      startMonth = 1;
+    }
+
+    this.devStackShopFormService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        this.creditCardMonths.set(data);
+      }
+    )
   }
 }
