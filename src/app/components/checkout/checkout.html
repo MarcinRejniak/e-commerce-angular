@@ -35,7 +35,7 @@
             <label for="shipping-country">Country</label>
             <select id="shipping-country"
                     formControlName="country"
-                    (change)="handleStates('shippingAddress')"
+                    (change)="getStates('shippingAddress')"
                     class="form-select">
 
               <option value="">Select Country</option>
@@ -83,7 +83,16 @@
         <div class="form-grid">
           <div class="form-field full-width">
             <label for="billing-country">Country</label>
-            <input id="billing-country" formControlName="country" type="text">
+            <select id="billing-country"
+                    formControlName="country"
+                    (change)="getStates('billingAddress')"
+                    class="form-select">
+
+              <option value="">Select Country</option>
+              @for (country of countries(); track country.name) {
+                <option [value]="country.slug">{{ country.name }}</option>
+              }
+            </select>
           </div>
 
           <div class="form-field full-width">
@@ -100,7 +109,7 @@
             <label for="billing-state">State</label>
             <select id="billing-state" formControlName="state" class="form-select">
               @for (state of billingAddressStates(); track state.name) {
-                <option>{{ state.name }}</option>
+                <option [value]="state.name">{{ state.name }}</option>
               }
             </select>
           </div>

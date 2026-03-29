@@ -86,14 +86,20 @@ export class Checkout implements OnInit{
   copyShippingAddressToBillingAddress(event: Event) {
 
     const isChecked = (event.target as HTMLInputElement).checked;
+    const billingGroup = this.checkoutFormGroup.get('billingAddress');
 
     if (isChecked) {
 
-      const shippingAddress = this.checkoutFormGroup.get('shippingAddress')?.value;
+      this.billingAddressStates.set(this.shippingAddressStates());
 
-      this.checkoutFormGroup.get('billingAddress')?.setValue(shippingAddress);
+      const shippingAddress = this.checkoutFormGroup.get('shippingAddress')?.value;
+      billingGroup?.setValue(shippingAddress);
+
+      billingGroup?.disable();
     } else {
-      this.checkoutFormGroup.get('billingAddress')?.reset();
+      billingGroup?.enable();
+      billingGroup?.reset();
+      this.billingAddressStates.set([]);
     }
   }
 
@@ -119,15 +125,15 @@ export class Checkout implements OnInit{
     )
   }
 
-  handleStates(groupName: string) {
+  getStates(formGroupName: string) {
 
-    const formGroup = this.checkoutFormGroup.get(groupName);
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
     const countrySlug = formGroup?.value?.country;
 
     if (countrySlug) {
       this.devStackShopFormService.getStates(countrySlug).subscribe(
         data => {
-          if (groupName === 'shippingAddress') {
+          if (formGroupName === 'shippingAddress') {
             this.shippingAddressStates.set(data);
           } else {
             this.billingAddressStates.set(data);
