@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {CartService} from '../../services/cart.service';
 import {CurrencyPipe} from '@angular/common';
 import {DevStackShopFormService} from '../../services/dev-stack-shop-form-service';
+import {Country} from '../../common/country';
+import {State} from '../../common/state';
 
 @Component({
   selector: 'app-checkout',
@@ -16,6 +18,9 @@ export class Checkout implements OnInit{
 
   creditCardYears = signal<number[]>([]);
   creditCardMonths = signal<number[]>([]);
+  countries = signal<Country[]>([]);
+  shippingAddressStates = signal<State[]>([]);
+  billingAddressStates = signal<State[]>([]);
 
   private readonly formBuilder = inject(FormBuilder);
   public readonly cartService = inject(CartService);
@@ -66,6 +71,12 @@ export class Checkout implements OnInit{
         this.creditCardYears.set(data);
       }
     )
+
+    this.devStackShopFormService.getCountries().subscribe(
+      data => {
+        this.countries.set(data);
+      }
+    )
   }
 
   onSubmit() {
@@ -106,5 +117,24 @@ export class Checkout implements OnInit{
         this.creditCardMonths.set(data);
       }
     )
+  }
+
+  handleStates(groupName: string) {
+
+    const formGroup = this.checkoutFormGroup.get(groupName);
+    const countrySlug = formGroup?.value?.country;
+
+    if (countrySlug) {
+      this.devStackShopFormService.getStates(countrySlug).subscribe(
+        data => {
+          if (groupName === 'shippingAddress') {
+            this.shippingAddressStates.set(data);
+          } else {
+            this.billingAddressStates.set(data);
+          }
+        }
+      )
+    }
+
   }
 }
