@@ -14,16 +14,52 @@
           <div class="form-field">
             <label for="firstName">First Name</label>
             <input id="firstName" formControlName="firstName" type="text" placeholder="e.g. John">
+
+            @if (firstName.invalid && (firstName.dirty || firstName.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (firstName.errors?.['required'] || firstName.errors?.['notOnlyWhitespace']) {
+                  <span>First name is required.</span>
+                }
+                @if (firstName.errors?.['minlength']) {
+                  <span>First name must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field">
             <label for="lastName">Last Name</label>
             <input id="lastName" formControlName="lastName" type="text" placeholder="e.g. Doe">
+
+            @if (lastName.invalid && (lastName.dirty || lastName.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (lastName.errors?.['required'] || lastName.errors?.['notOnlyWhitespace']) {
+                  <span>Last name is required.</span>
+                }
+                @if (lastName.errors?.['minlength']) {
+                  <span>Last name must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field full-width">
             <label for="email">Email Address</label>
             <input id="email" formControlName="email" type="email" placeholder="john.doe@example.com">
+
+            @if (email.invalid && (email.dirty || email.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (email.errors?.['required']) {
+                  <span>Email is required.</span>
+                }
+                @if (email.errors?.['pattern']) {
+                  <span>Email must be a valid email address format.</span>
+                }
+              </div>
+            }
+
           </div>
         </div>
       </section>
@@ -192,7 +228,7 @@
       </section>
 
       <div class="form-actions">
-        <button type="submit" class="btn-purchase" [disabled]="!checkoutFormGroup.valid">
+        <button type="submit" class="btn-purchase">
           Complete Purchase
         </button>
       </div>

@@ -1,10 +1,11 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CartService} from '../../services/cart.service';
 import {CurrencyPipe} from '@angular/common';
 import {DevStackShopFormService} from '../../services/dev-stack-shop-form-service';
 import {Country} from '../../common/country';
 import {State} from '../../common/state';
+import {DevStackShopValidators} from '../../validators/dev-stack-shop-validators';
 
 @Component({
   selector: 'app-checkout',
@@ -30,9 +31,20 @@ export class Checkout implements OnInit{
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: [''],
-        lastName: [''],
-        email: [''],
+        firstName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          DevStackShopValidators.notOnlyWhitespace
+        ]),
+        lastName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          DevStackShopValidators.notOnlyWhitespace
+        ]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+        ]),
       }),
       shippingAddress: this.formBuilder.group({
         country: [''],
@@ -81,6 +93,21 @@ export class Checkout implements OnInit{
 
   onSubmit() {
 
+    if (this.checkoutFormGroup.invalid) {
+      this.checkoutFormGroup.markAllAsTouched();
+    }
+  }
+
+  get firstName() {
+    return this.checkoutFormGroup.get('customer.firstName') as FormControl;
+  }
+
+  get lastName() {
+    return this.checkoutFormGroup.get('customer.lastName') as FormControl;
+  }
+
+  get email() {
+    return this.checkoutFormGroup.get('customer.email') as FormControl;
   }
 
   copyShippingAddressToBillingAddress(event: Event) {
