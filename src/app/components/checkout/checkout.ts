@@ -101,8 +101,14 @@ export class Checkout implements OnInit{
           Validators.minLength(2),
           DevStackShopValidators.notOnlyWhitespace
         ]),
-        cardNumber: [''],
-        securityCode: [''],
+        cardNumber: new FormControl('', [
+          Validators.required,
+          Validators.pattern('[0-9]{16}')
+        ]),
+        securityCode: new FormControl('', [
+          Validators.required,
+          Validators.pattern('[0-9]{3}')
+        ]),
         expirationMonth: [''],
         expirationYear: [''],
       })
@@ -186,6 +192,22 @@ export class Checkout implements OnInit{
 
   get billingAddressZipCode() {
     return this.checkoutFormGroup.get('billingAddress.zipcode');
+  }
+
+  get creditCardType() {
+    return this.checkoutFormGroup.get('creditCard.cardType');
+  }
+
+  get creditCardNameOnCard() {
+    return this.checkoutFormGroup.get('creditCard.nameOnCard');
+  }
+
+  get creditCardNumber() {
+    return this.checkoutFormGroup.get('creditCard.cardNumber');
+  }
+
+  get creditCardSecurityCode() {
+    return this.checkoutFormGroup.get('creditCard.securityCode');
   }
 
   copyShippingAddressToBillingAddress(event: Event) {

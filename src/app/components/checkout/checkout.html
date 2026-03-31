@@ -277,16 +277,48 @@
               <option value="Mastercard">Mastercard</option>
               <option value="American Express">American Express</option>
             </select>
+
+            @if (creditCardType?.invalid && (creditCardType?.dirty || creditCardType?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (creditCardType?.errors?.['required']){
+                  <span>Credit card type is required.</span>
+                }
+              </div>
+            }
           </div>
 
           <div class="form-field full-width">
             <label for="nameOnCard">Name on Card</label>
             <input id="nameOnCard" formControlName="nameOnCard" type="text" placeholder="Full name as displayed on card">
+
+            @if (creditCardNameOnCard?.invalid && (creditCardNameOnCard?.dirty || creditCardNameOnCard?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (creditCardNameOnCard?.errors?.['required'] || creditCardNameOnCard?.errors?.['notOnlyWhitespace']){
+                  <span>Credit card name is required.</span>
+                }
+                @if (creditCardNameOnCard?.errors?.['minlength']) {
+                  <span>Credit card name must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field full-width">
             <label for="cardNumber">Card Number</label>
             <input id="cardNumber" formControlName="cardNumber" type="text" placeholder="1234 5678 9101 1121">
+
+            @if (creditCardNumber?.invalid && (creditCardNumber?.dirty || creditCardNumber?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (creditCardNumber?.errors?.['required']){
+                  <span>Credit card number is required.</span>
+                }
+                @if (creditCardNumber?.errors?.['pattern']) {
+                  <span>Credit card number must be 16 digits.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field">
@@ -310,6 +342,18 @@
           <div class="form-field">
             <label for="securityCode">Security Code (CVV)</label>
             <input id="securityCode" formControlName="securityCode" type="password" placeholder="123" maxlength="3">
+
+            @if (creditCardSecurityCode?.invalid && (creditCardSecurityCode?.dirty || creditCardSecurityCode?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (creditCardSecurityCode?.errors?.['required']){
+                  <span>Credit card number is required.</span>
+                }
+                @if (creditCardSecurityCode?.errors?.['pattern']) {
+                  <span>Credit card number must be 3 digits.</span>
+                }
+              </div>
+            }
+
           </div>
         </div>
       </section>
