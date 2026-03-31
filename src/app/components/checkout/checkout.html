@@ -15,12 +15,12 @@
             <label for="firstName">First Name</label>
             <input id="firstName" formControlName="firstName" type="text" placeholder="e.g. John">
 
-            @if (firstName.invalid && (firstName.dirty || firstName.touched)) {
+            @if (firstName?.invalid && (firstName?.dirty || firstName?.touched)) {
               <div class="alert alert-danger mt-1">
-                @if (firstName.errors?.['required'] || firstName.errors?.['notOnlyWhitespace']) {
+                @if (firstName?.errors?.['required'] || firstName?.errors?.['notOnlyWhitespace']) {
                   <span>First name is required.</span>
                 }
-                @if (firstName.errors?.['minlength']) {
+                @if (firstName?.errors?.['minlength']) {
                   <span>First name must be at least 2 characters long.</span>
                 }
               </div>
@@ -32,12 +32,12 @@
             <label for="lastName">Last Name</label>
             <input id="lastName" formControlName="lastName" type="text" placeholder="e.g. Doe">
 
-            @if (lastName.invalid && (lastName.dirty || lastName.touched)) {
+            @if (lastName?.invalid && (lastName?.dirty || lastName?.touched)) {
               <div class="alert alert-danger mt-1">
-                @if (lastName.errors?.['required'] || lastName.errors?.['notOnlyWhitespace']) {
+                @if (lastName?.errors?.['required'] || lastName?.errors?.['notOnlyWhitespace']) {
                   <span>Last name is required.</span>
                 }
-                @if (lastName.errors?.['minlength']) {
+                @if (lastName?.errors?.['minlength']) {
                   <span>Last name must be at least 2 characters long.</span>
                 }
               </div>
@@ -49,12 +49,12 @@
             <label for="email">Email Address</label>
             <input id="email" formControlName="email" type="email" placeholder="john.doe@example.com">
 
-            @if (email.invalid && (email.dirty || email.touched)) {
+            @if (email?.invalid && (email?.dirty || email?.touched)) {
               <div class="alert alert-danger mt-1">
-                @if (email.errors?.['required']) {
+                @if (email?.errors?.['required']) {
                   <span>Email is required.</span>
                 }
-                @if (email.errors?.['pattern']) {
+                @if (email?.errors?.['pattern']) {
                   <span>Email must be a valid email address format.</span>
                 }
               </div>
@@ -79,16 +79,49 @@
                 <option [value]="country.slug">{{ country.name }}</option>
               }
             </select>
+
+            @if (shippingAddressCountry?.invalid && (shippingAddressCountry?.dirty || shippingAddressCountry?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (shippingAddressCountry?.errors?.['required']) {
+                  <span>Country is required.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field full-width">
             <label for="shipping-street">Street</label>
             <input id="shipping-street" formControlName="street" type="text">
+
+            @if (shippingAddressStreet?.invalid && (shippingAddressStreet?.dirty || shippingAddressStreet?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (shippingAddressStreet?.errors?.['required'] || shippingAddressStreet?.errors?.['notOnlyWhitespace']){
+                  <span>Street is required.</span>
+                }
+                @if (shippingAddressStreet?.errors?.['minlength']) {
+                  <span>Street must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field">
             <label for="shipping-city">City</label>
             <input id="shipping-city" formControlName="city" type="text">
+
+            @if (shippingAddressCity?.invalid && (shippingAddressCity?.dirty || shippingAddressCity?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (shippingAddressCity?.errors?.['required'] || shippingAddressCity?.errors?.['notOnlyWhitespace']){
+                  <span>City is required.</span>
+                }
+                @if (shippingAddressCity?.errors?.['minlength']) {
+                  <span>City must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field">
@@ -98,11 +131,32 @@
                 <option [value]="state.name">{{ state.name }}</option>
               }
             </select>
+
+            @if (shippingAddressState?.invalid && (shippingAddressState?.dirty || shippingAddressState?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (shippingAddressState?.errors?.['required']){
+                  <span>State is required.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field">
             <label for="shipping-zipCode">Zip Code</label>
             <input id="shipping-zipCode" formControlName="zipcode" type="text">
+
+            @if (shippingAddressZipCode?.invalid && (shippingAddressZipCode?.dirty || shippingAddressZipCode?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (shippingAddressZipCode?.errors?.['required'] || shippingAddressZipCode?.errors?.['notOnlyWhitespace']){
+                  <span>Zip code is required.</span>
+                }
+                @if (shippingAddressZipCode?.errors?.['minlength']) {
+                  <span>Zip code must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
         </div>
       </section>
@@ -129,16 +183,49 @@
                 <option [value]="country.slug">{{ country.name }}</option>
               }
             </select>
+
+            @if (billingAddressCountry?.invalid && (billingAddressCountry?.dirty || billingAddressCountry?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (billingAddressCountry?.errors?.['required']) {
+                  <span>Country is required.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field full-width">
             <label for="billing-street">Street</label>
             <input id="billing-street" formControlName="street" type="text">
+
+            @if (billingAddressStreet?.invalid && (billingAddressStreet?.dirty || billingAddressStreet?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (billingAddressStreet?.errors?.['required'] || billingAddressStreet?.errors?.['notOnlyWhitespace']){
+                  <span>Street is required.</span>
+                }
+                @if (billingAddressStreet?.errors?.['minlength']) {
+                  <span>Street must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field">
             <label for="billing-city">City</label>
             <input id="billing-city" formControlName="city" type="text">
+
+            @if (billingAddressCity?.invalid && (billingAddressCity?.dirty || billingAddressCity?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (billingAddressCity?.errors?.['required'] || billingAddressCity?.errors?.['notOnlyWhitespace']){
+                  <span>City is required.</span>
+                }
+                @if (billingAddressCity?.errors?.['minlength']) {
+                  <span>City must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field">
@@ -148,11 +235,32 @@
                 <option [value]="state.name">{{ state.name }}</option>
               }
             </select>
+
+            @if (billingAddressState?.invalid && (billingAddressState?.dirty || billingAddressState?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (billingAddressState?.errors?.['required']){
+                  <span>State is required.</span>
+                }
+              </div>
+            }
+
           </div>
 
           <div class="form-field">
             <label for="billing-zipCode">Zip Code</label>
             <input id="billing-zipCode" formControlName="zipcode" type="text">
+
+            @if (billingAddressZipCode?.invalid && (billingAddressZipCode?.dirty || billingAddressZipCode?.touched)) {
+              <div class="alert alert-danger mt-1">
+                @if (billingAddressZipCode?.errors?.['required'] || billingAddressZipCode?.errors?.['notOnlyWhitespace']){
+                  <span>Zip code is required.</span>
+                }
+                @if (billingAddressZipCode?.errors?.['minlength']) {
+                  <span>Zip code must be at least 2 characters long.</span>
+                }
+              </div>
+            }
+
           </div>
         </div>
       </section>
