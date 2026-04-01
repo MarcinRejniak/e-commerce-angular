@@ -1,59 +1,98 @@
-# AngularEcommerce
+# 🛒 DevStack Shop - Full Stack E-commerce Platform
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+[![Java](https://img.shields.io/badge/Java-21%2B-orange.svg)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.3-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Angular](https://img.shields.io/badge/Angular-21.2.0-red.svg)](https://angular.io/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)](https://www.mysql.com/)
 
-## Development server
+A modern, high-performance e-commerce application built with **Java 21**, **Spring Boot 4**, and **Angular 21**. This project serves as a technical showcase of modern reactive programming, high-performance backend architecture, and robust frontend state management.
 
-To start a local development server, run:
+## 🔗 Project Components
+* **Backend API (this repo):** Java 21, Spring Boot 4 | (https://github.com/MarcinRejniak/e-commerce-spring-boot)
+* **Frontend UI Repository:** Angular 21.2.0
 
-```bash
-ng serve
-```
+## 📸 App Preview
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+A visual walkthrough of the core features and user experience of the DevStack Shop platform.
 
-## Code scaffolding
+### 📦 Dynamic Product Catalog
+The application leverages high-performance **server-side pagination (Spring Boot 4)** to ensure seamless browsing of thousands of products with minimal network overhead and optimized database queries.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| First 10 products | Second page of products |
+|---|---|
+| ![First 10 products](assets/screenshots/img.png) | ![Second page of products](assets/screenshots/img_1.png) |
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 🔍 Smart Search & Filtering
+Fast and efficient keyword-based discovery. The backend is optimized to handle dynamic search queries, allowing users to find specific technologies or topics (e.g., "Python") instantly.
 
-```bash
-ng generate --help
-```
+![Searching by keyword](assets/screenshots/img_8.png)
+*Keyword-based product filtering with real-time UI updates.*
 
-## Building
+---
 
-To build the project run:
+### 📖 Product Deep-Dive
+Each product features a dedicated detail page where data is fetched asynchronously using **Angular 21's modern routing**, providing an instantaneous and responsive user experience.
 
-```bash
-ng build
-```
+![Java Book's details page](assets/screenshots/img_2.png)
+*Detail view with dynamic data fetching and clean UI architecture.*
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+### 🌍 Dynamic Geographic Data Integration
+A core technical highlight: The application reactively fetches and synchronizes country and state data from external APIs.
+* **Reactive Sync:** Selecting a country automatically triggers a filtered fetch for corresponding states.
+* **Defensive Mapping:** The **Java 21** backend ensures stability by handling polymorphic responses from third-party geographic services.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+| Country Selection | Dynamic State Loading |
+|---|---|
+| ![Country list](assets/screenshots/img_6.png) | ![State list](assets/screenshots/img_7.png) |
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+### 🛒 Reactive Shopping Experience (Signals-Driven)
+Cart management is powered entirely by **Angular Signals**, eliminating the need for manual change detection or heavy RxJS subscriptions. This ensures 100% data consistency across the UI in real-time.
 
-For end-to-end (e2e) testing, run:
+| Cart Details | Cart Summary |
+|---|---|
+| ![Cart details](assets/screenshots/img_3.png) | ![Cart summary](assets/screenshots/img_5.png) |
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 🛡️ Frontend Validation & UX
+The checkout flow features a robust **Angular-side validation system**. By leveraging **Angular 21's Reactive Forms**, the application provides immediate visual feedback, ensuring a seamless user experience and preventing the submission of incomplete data.
 
-## Additional Resources
+![Invalid data form](assets/screenshots/img_4.png)
+*Real-time error handling and feedback powered by custom DevStackValidators.*
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🌟 Key Features
+
+* **Dynamic Geographic Data:** Full integration with external REST APIs (Altoal) to fetch countries and states dynamically.
+* **Advanced Checkout System:** * Address synchronization (Shipping to Billing) with Signal-based state management.
+  * Real-time validation and error handling.
+* **Reactive State Management:** Utilizing **Angular Signals** for the shopping cart and UI state, replacing traditional RxJS Subjects for better performance and readability.
+* **Robust Backend:** * RESTful API with Spring Boot.
+  * Data persistence using Spring Data JPA & Hibernate.
+  * Pagination, filtering, and searching capabilities.
+* **Custom Validation:** Implemented proprietary validators (e.g., `notOnlyWhitespace`) to ensure high-quality user data.
+
+## 🛠 Tech Stack
+
+### Backend
+- **Core:** Java 21+, Spring Boot 4.0.3
+- **Data:** Spring Data JPA, Hibernate, MySQL
+- **Security/Tools:** Lombok, Maven, Jackson
+
+### Frontend
+- **Core:** Angular 21.2.0, TypeScript
+- **State:** Angular Signals (Modern reactive approach)
+- **Styling:** CSS3 (Custom Variables), Bootstrap 5, FontAwesome
+
+## 🚀 Technical Highlights
+
+### Defensive API Mapping (Java)
+One of the core challenges was handling inconsistent data formats from external geographic APIs. I implemented a **Defensive Mapping Layer** using Java Streams and polymorphic type checking (handling both `String` and `Map` JSON structures) to ensure backend stability regardless of external API changes.
+
+### Reactive UI with Signals
+The application utilizes the latest Angular features. The shopping cart and address synchronization logic leverage **Signals** and **Computed values**, reducing boilerplate code and optimizing change detection cycles.
