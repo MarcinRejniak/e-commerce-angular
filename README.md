@@ -8,7 +8,7 @@
 A modern, high-performance e-commerce application built with **Java 21**, **Spring Boot 4**, and **Angular 21**. This project serves as a technical showcase of modern reactive programming, high-performance backend architecture, and robust frontend state management.
 
 ## 🔗 Project Components
-* **Backend API REPOSITORY:** Java 21, Spring Boot 4 | (https://github.com/MarcinRejniak/e-commerce-spring-boot)
+* **Backend API Repository:** Java 21, Spring Boot 4 | (https://github.com/MarcinRejniak/e-commerce-spring-boot)
 * **Frontend UI (this repo):** Angular 21.2.0
 
 ## 📸 App Preview
