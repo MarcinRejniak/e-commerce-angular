@@ -1,86 +1,76 @@
-<div class="row g-4">
-  @for (product of products(); track product.id) {
-    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-
-      <div class="card product-card shadow-sm h-100">
-        <div class="product-img-wrapper">
-
-          <a routerLink="/products/{{ product.id }}" class="text-decoration-none">
+@if (products().length > 0) {
+  <div class="product-grid">
+    @for (product of products(); track product.id) {
+      <article class="product-card">
+        <div class="product-card__image-wrapper">
+          <a [routerLink]="['/products', product.id]">
             <img [ngSrc]="product.imageUrl"
                  width="300"
                  height="270"
-                 (error)="$any($event.target).src = 'images/products/placeholder.png'"
-                 class="img-fluid rounded-3"
-                 style="max-height: 180px; object-fit: contain;"
-                 alt="{{ product.name }}">
+                 class="product-card__img"
+                 alt="{{ product.name }}"
+                 (error)="$any($event.target).src = 'images/products/placeholder.png'">
           </a>
-
         </div>
 
-        <div class="card-body p-4 d-flex flex-column">
-          <div class="text-muted small mb-1">{{ product.category.categoryName }}</div>
+        <div class="product-card__content">
+          <span class="product-card__category">{{ product.category.categoryName }}</span>
 
-          <a routerLink="/products/{{ product.id }}" class="text-decoration-none">
-            <h5 class="product-title text-dark">{{ product.name }}</h5>
+          <a [routerLink]="['/products', product.id]" class="product-card__title-link">
+            <h3 class="product-card__title">{{ product.name }}</h3>
           </a>
 
-          <div class="d-flex justify-content-between align-items-center mt-auto pt-3">
-            <span class="price-tag">{{ product.unitPrice | currency: 'USD' }}</span>
-
-            <button (click)="addToCart(product)" class="btn btn-primary btn-cart d-flex align-items-center px-3">
-              <i class="bi bi-plus-lg me-1"></i>Add
+          <div class="product-card__footer">
+            <span class="product-card__price">{{ product.unitPrice | currency: 'USD' }}</span>
+            <button (click)="addToCart(product)" class="btn-cart">
+              <i class="bi bi-plus-lg"></i> Add
             </button>
           </div>
         </div>
+      </article>
+    }
+  </div>
+}
 
-      </div>
-    </div>
-  }
-
-  @if (products().length == 0) {
-    <div class="col-12 mt-4 mb-4">
-      <div class="alert alert-warning text-center shadow-sm border-0 py-4" role="alert">
-        <i class="bi bi-exclamation-triangle-fill me-2"></i>
-        No products found. Try searching for something else!
-      </div>
-    </div>
-  }
-
-  <div class="col-12 mt-5 mb-5">
-    <div class="footer-pagination p-3 bg-white shadow-sm rounded-3">
-      <div class="row align-items-center">
-
-        <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
-          <div class="text-muted small me-3">
-            Showing <span class="fw-bold" style="color: var(--text-dark)">{{ products().length }}</span>
-            of {{ totalElements() }} products
-          </div>
-
-          <div class="d-flex align-items-center">
-            <span class="small text-muted me-3 mb-0 text-nowrap">Page size:</span>
-            <select #pageSelect class="form-select form-select-sm custom-select"
-                    (change)="updatePageSize(pageSelect.value)">
-              <option [selected]="pageSize() === 5">5</option>
-              <option [selected]="pageSize() === 10">10</option>
-              <option [selected]="pageSize() === 20">20</option>
-              <option [selected]="pageSize() === 50">50</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
-          <ngb-pagination class="custom-pagination m-0"
-            [(page)]="pageNumber"
-            [pageSize]="pageSize()"
-            [collectionSize]="totalElements()"
-            [maxSize]="5"
-            [boundaryLinks]="true"
-            [ellipses]="true"
-            (pageChange)="listProducts()">
-
-          </ngb-pagination>
-        </div>
-      </div>
+@if (products().length === 0) {
+  <div class="no-results-container">
+    <div class="no-results-content">
+      <i class="bi bi-search"></i>
+      <h3>No products found</h3>
+      <p>Try searching for something else or check your spelling.</p>
     </div>
   </div>
-</div>
+}
+
+@if (products().length > 0) {
+  <div class="pagination-bar">
+    <div class="pagination-bar__left">
+      <span class="pagination-bar__count">
+        Showing <strong>{{ products().length }}</strong> of {{ totalElements() }} products
+      </span>
+
+      <div class="pagination-bar__select-group">
+        <label for="pageSize">Items per page</label>
+        <div class="custom-select-wrapper">
+          <select id="pageSize" #pageSelect (change)="updatePageSize(pageSelect.value)" class="custom-select">
+            @for (size of [5, 10, 20, 50]; track size) {
+              <option [value]="size" [selected]="pageSize() === size">{{ size }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination-bar__nav">
+      <ngb-pagination
+        class="d-flex m-0"
+        [(page)]="pageNumber"
+        [pageSize]="pageSize()"
+        [collectionSize]="totalElements()"
+        [maxSize]="5"
+        [boundaryLinks]="true"
+        (pageChange)="listProducts()">
+      </ngb-pagination>
+    </div>
+  </div>
+}

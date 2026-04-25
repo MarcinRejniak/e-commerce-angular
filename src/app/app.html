@@ -1,39 +1,40 @@
-<nav class="navbar navbar-expand-lg sticky-top border-bottom bg-white py-3" aria-label="Main navigation">
-  <div class="container">
-    <a routerLink="/products" class="navbar-brand fw-bold text-primary">
-      <i class="bi bi-stack me-2"></i>DEVSTACK
+<header class="navbar sticky-top">
+  <div class="container navbar__container">
+    <a routerLink="/products" class="navbar__brand">
+      <i class="bi bi-stack"></i> DEVSTACK
     </a>
-
-    <div class="flex-grow-1 mx-lg-5">
+    <div class="navbar__search">
       <app-search></app-search>
     </div>
-
-    <div class="cart-status-wrapper d-flex align-items-center gap-3">
+    <div class="navbar__actions">
       <app-cart-status></app-cart-status>
     </div>
   </div>
-</nav>
+</header>
 
-<main class="container mt-4">
-  <div class="row">
-
-    <aside class="col-lg-3 mb-4">
+<main class="container main-layout">
+  <aside class="main-layout__sidebar">
+    <div class="sidebar-wrapper">
       <app-product-category-menu></app-product-category-menu>
-    </aside>
+    </div>
+  </aside>
 
-    <section class="col-lg-9">
+  <section class="main-layout__content">
+    <div class="content-wrapper">
       <router-outlet></router-outlet>
-    </section>
-  </div>
+    </div>
+  </section>
 </main>
 
-<footer>
-  <div class="container text-center text-muted small">
-    <p>&copy; 2026 DevStack Shop. Built with Angular & Spring Boot.</p>
-    <div class="d-flex justify-content-center gap-3">
-      <a href="#" class="text-decoration-none">Privacy Policy</a>
-      <a href="#" class="text-decoration-none">Terms of Service</a>
-      <a href="#" class="text-decoration-none">Contact</a>
+<footer class="footer">
+  <div class="container">
+    <p class="footer__text">
+      © 2026 DevStack Shop. Built with Angular & Spring Boot.
+    </p>
+    <div class="footer__links">
+      <a routerLink="/privacy">Privacy Policy</a>
+      <a routerLink="/terms">Terms of Service</a>
+      <a routerLink="/contact">Contact</a>
     </div>
   </div>
 </footer>

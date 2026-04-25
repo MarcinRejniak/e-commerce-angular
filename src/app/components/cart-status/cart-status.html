@@ -1,12 +1,14 @@
-<div class="cart-status-wrapper">
-  <a routerLink="/cart-details" class="cart-icon-container">
-    <i class="fa fa-shopping-cart fs-4 text-secondary"></i>
-    <span class="badge rounded-pill bg-danger">
-      {{ this.cartService.totalQuantity() }}
+<div class="cart-status" routerLink="/cart-details">
+  <div class="cart-status__icon-wrapper">
+    <i class="fa fa-shopping-cart cart-status__icon"></i>
+    <span class="cart-status__badge">
+      {{ cartService.totalQuantity() }}
     </span>
-  </a>
+  </div>
 
-  <div class="cart-total text-dark">
-    {{ this.cartService.totalPrice() | currency:'USD'}}
+  <div class="cart-status__info">
+    <span class="cart-status__amount">
+      {{ cartService.totalPrice() | currency:'USD' }}
+    </span>
   </div>
 </div>

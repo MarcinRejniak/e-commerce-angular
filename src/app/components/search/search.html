@@ -1,11 +1,14 @@
-<form class="d-flex w-100" (submit)="doSearch(searchInput.value)">
-  <div class="input-group">
+<form class="search-bar" (submit)="doSearch(searchInput.value); $event.preventDefault()">
+  <div class="search-bar__wrapper">
+    <i class="bi bi-search search-bar__icon"></i>
     <input #searchInput
            type="text"
-           class="search-input border-0 flex-grow-1 rounded-start-pill ps-4"
+           class="search-bar__input"
            placeholder="Search for products..."
            aria-label="Search">
 
-    <button class="btn btn-primary rounded-end-pill px-4" type="submit">Search</button>
+    <button class="search-bar__button" type="submit">
+      Search
+    </button>
   </div>
 </form>

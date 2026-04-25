@@ -11,8 +11,9 @@
             <span class="col-product">Product</span>
             <span class="col-quantity">Quantity</span>
             <span class="col-price">Sum</span>
-            <span class="col-action"></span> </div>
+            <span class="col-action"></span>
           </div>
+
 
           @for (item of cartService.cartItems(); track item.id) {
             <article class="cart-row">
@@ -51,6 +52,7 @@
               </div>
             </article>
           }
+        </div>
       </section>
 
       <aside class="cart-summary">
@@ -76,11 +78,16 @@
     </div>
 
   } @else {
-    <div class="empty-cart-container">
-      <i class="fa fa-shopping-basket mb-3"></i>
-      <h3>Your cart is empty</h3>
-      <p>Looks like you haven't added anything to your cart yet.</p>
-      <button routerLink="/products" class="btn-primary">Start Shopping</button>
+    <div class="no-results-container">
+      <div class="no-results-content">
+        <i class="bi bi-cart-x"></i>
+        <h3>Your cart is empty</h3>
+        <p>Looks like you haven't added anything to your cart yet.</p>
+
+        <a routerLink="/products" class="btn-start-shopping">
+          <i class="bi bi-arrow-left"></i> Start Shopping
+        </a>
+      </div>
     </div>
   }
 </div>

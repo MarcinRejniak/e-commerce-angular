@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+.sidebar-title {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  padding: 0 16px;
+}
+
+.category-link {
+  display: block;
+  padding: 10px 16px;
+  color: var(--text-dark);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: var(--transition);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  border-left: 4px solid transparent;
+}
+
+.category-link:hover {
+  background-color: #eff6ff;
+  color: var(--primary-color);
+}
+
+.category-link.active {
+  background-color: #eff6ff;
+  color: var(--primary-color);
+  font-weight: 600;
+  border-left-color: var(--primary-color);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
