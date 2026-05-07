@@ -16,11 +16,12 @@ export const appConfig: ApplicationConfig = {
       clientId: environment.auth0.clientId,
       authorizationParams: {
         redirect_uri: window.location.origin,
-        audience: "http://localhost:8081",
+        audience: "http://localhost:8080",
       },
       httpInterceptor: {
         allowedList: [
-          'http://localhost:8081/api/*'
+          'http://localhost:8081/api/checkout',
+          'http://localhost:8081/api/checkout/*'
         ]
       }
     }),

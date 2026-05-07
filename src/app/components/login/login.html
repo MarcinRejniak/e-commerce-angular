@@ -1,0 +1,16 @@
+<div class="login-status__section">
+  @if (!(auth.isAuthenticated$ | async)) {
+    <button tpye="button" class="login-status__button" (click)="login()">
+      Login
+    </button>
+  }
+
+  @if (auth.isAuthenticated$ | async) {
+    <div class="d-flex align-items-center">
+      <span class="me-2">Hello, {{ (auth.user$ | async)?.email }}</span>
+      <button class="logout-status__button" (click)="logout()">
+        Logout
+      </button>
+    </div>
+  }
+</div>

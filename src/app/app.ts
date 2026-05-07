@@ -5,10 +5,11 @@ import {Search} from './components/search/search';
 import {CartStatus} from './components/cart-status/cart-status';
 import {AuthService} from '@auth0/auth0-angular';
 import {CommonModule} from '@angular/common';
+import {Login} from './components/login/login';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductCategoryMenu, Search, CartStatus, RouterLink, CommonModule],
+  imports: [RouterOutlet, ProductCategoryMenu, Search, CartStatus, RouterLink, CommonModule, Login],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

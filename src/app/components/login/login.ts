@@ -1,16 +1,19 @@
 import {Component, DOCUMENT, effect, inject} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
 import {toSignal} from '@angular/core/rxjs-interop';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
-  selector: 'app-login-status',
-  imports: [],
-  templateUrl: './login-status.html',
-  styleUrl: './login-status.css',
+  selector: 'app-login',
+  imports: [
+    AsyncPipe
+  ],
+  templateUrl: './login.html',
+  styleUrl: './login.css',
 })
-export class LoginStatus {
+export class Login {
 
-  private readonly auth = inject(AuthService);
+  protected readonly auth = inject(AuthService);
   private readonly doc = inject(DOCUMENT);
   private readonly storage: Storage = sessionStorage;
 
